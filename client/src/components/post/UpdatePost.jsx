@@ -54,8 +54,8 @@ function UpdatePost() {
                 <InputBase className={style.textfield} placeholder="title of blog" /> 
                 <Button variant="contained" color="primary">Update</Button>
             </FormControl>
+            <InputBase placeholder="Category"></InputBase>
             <TextareaAutosize placeholder="Put Your Thoughts Here" minRows='5' className={style.textarea}>
-
             </TextareaAutosize>
         </Box>    
     )

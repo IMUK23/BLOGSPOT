@@ -45,17 +45,17 @@ const styleclass=makeStyles({
 
   }
 })
-function Posttemplate() {
-    const url="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80"
+function Posttemplate({post}) {
+    const url= post.image || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80"
     const styles=styleclass();
     return (
         <Link className={styles.link} to="/display">
           <Box className={styles.container}>
               <img src={url} alt="image" className={styles.postimage}/>
-              <Typography className={styles.category}>Category</Typography>
-              <Typography className={styles.author}>Author</Typography>
-              <Typography className={styles.title}>Title</Typography>
-              <Typography className={styles.intro}>Intro</Typography> 
+              <Typography className={styles.category}>{post.category}</Typography>
+              <Typography className={styles.author}>{post.username}</Typography>
+              <Typography className={styles.title}>{post.title}</Typography>
+              <Typography className={styles.intro}>{post.description}</Typography> 
           </Box>
         </Link>
     )
