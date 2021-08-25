@@ -13,8 +13,8 @@ function Routes() {
         
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/update" component={UpdatePost} />
-                <Route exact path="/display" component={DisplayPost} />
+                <Route exact path="/update/:id" component={UpdatePost} />
+                <Route exact path="/display/:id" component={DisplayPost} />
                 <Route exact path="/create" component={CreatePost} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/contact" component={Contact} />

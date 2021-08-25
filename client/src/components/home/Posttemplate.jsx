@@ -49,7 +49,7 @@ function Posttemplate({post}) {
     const url= post.image || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80"
     const styles=styleclass();
     return (
-        <Link className={styles.link} to="/display">
+        <Link className={styles.link} to={`/display/${post._id}`}>
           <Box className={styles.container}>
               <img src={url} alt="image" className={styles.postimage}/>
               <Typography className={styles.category}>{post.category}</Typography>

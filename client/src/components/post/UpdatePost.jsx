@@ -1,6 +1,9 @@
 import React from 'react'
+import { useState,useEffect } from 'react';
 import {Box, FormControl, makeStyles,Button, InputBase, TextareaAutosize} from '@material-ui/core'
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import { getOnePostData ,updatePostData } from '../service/api';
+import History from '../History';
 
 const styleclass=makeStyles(theme => ({
     container:{
@@ -43,19 +46,61 @@ const styleclass=makeStyles(theme => ({
     }
 })
 )
-
-function UpdatePost() {
+/*Match is a default prop which can access various data like URL using match.params*/ 
+function UpdatePost({match}) {
     const style=styleclass()
+
+    const [post,setPost] =useState({})
+
+    useEffect( () => {
+        const fetchdata = async () =>{
+            const data= await getOnePostData(match.params.id);
+            setPost(data)
+        }
+        fetchdata();
+    }  
+    ,[])
+
+    const handlechange=(e)=>{
+        setPost(post => ({...post,[e.target.name] : e.target.value}))
+        console.log(post);
+    }
+
+    const updateData = async () =>{
+        console.log(post)
+        await updatePostData(match.params.id,post)
+        console.log("Data sent successfully");
+        History.push(`/display/${match.params.id}`)
+    }
+
     return (
+
         <Box className={style.container}>
-            <img className={style.image} src="https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'" alt="banner image" />
+            <img className={style.image} src={post.image || "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'"} alt="banner image" />
             <FormControl className={style.form}>
                 <ImageSearchIcon className={style.icon}/>
-                <InputBase className={style.textfield} placeholder="title of blog" /> 
-                <Button variant="contained" color="primary">Update</Button>
+                <InputBase 
+                className={style.textfield} 
+                placeholder="title of blog" 
+                value={post.title}
+                name="title"
+                onChange={e => handlechange(e)}>
+                </InputBase> 
+                <Button variant="contained" color="primary" onClick={() => updateData()}>Update</Button>
             </FormControl>
-            <InputBase placeholder="Category"></InputBase>
-            <TextareaAutosize placeholder="Put Your Thoughts Here" minRows='5' className={style.textarea}>
+            <InputBase 
+            placeholder="Category"
+             value={post.category}
+             name="category"
+             onChange={e => handlechange(e)}
+             ></InputBase>
+            <TextareaAutosize 
+            placeholder="Put Your Thoughts Here"
+             minRows='5' 
+             className={style.textarea} 
+             name="description"
+             value={post.description}
+             onChange={e => handlechange(e)}>
             </TextareaAutosize>
         </Box>    
     )
