@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, makeStyles, StylesProvider, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
+import {Box,Button, InputBase, makeStyles, StylesProvider, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
 import History from '../History'
 
 const styleClass=makeStyles({
@@ -7,7 +7,7 @@ const styleClass=makeStyles({
         background:"#438BE8",
         color:"white",
         margin:20,
-        width:200,
+        width:"85%",
         '&:hover':{
             background:"#7BA3E8",
         }
@@ -15,8 +15,24 @@ const styleClass=makeStyles({
     table:{
         border:'1px solid rgba(224,224,224)'
     },
+
     categoryname:{
         cursor:"pointer"
+    },
+    searchdiv:{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"centre",
+        justifyContent:"center",
+    },
+    searchbox:{
+        border:"1px solid #0e0f0f",
+        marginLeft:"15px",
+        width:'85%'
+    },
+    searchbutton:{
+        width:"40%",
+        margin:"auto"
     }
 })
 
@@ -31,6 +47,12 @@ function Categories() {
        
         <Table className={styles.table}>
             <TableHead>
+                <TableRow>
+                    <Box className={styles.searchdiv}>
+                    <InputBase className={styles.searchbox} placeholder="Seach By Category" name="seachbox" />
+                    <Button variant="contained" className={styles.searchbutton} >Search </Button>
+                    </Box>
+                </TableRow>
                 <TableRow>
                     <TableCell>Popular Categories
                     </TableCell>    
