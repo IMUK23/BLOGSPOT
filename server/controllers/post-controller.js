@@ -15,8 +15,22 @@ export const postcontroller= async (request,response)=>{
 
 
 export const getPostData=async (request,response) =>{
+    let username=request.query.username;
+    let category=request.query.category;
+    console.log(username+" "+ category);
+    let data;
     try{
-        const data=await postdata.find({});
+        
+        if(username){
+            data=await postdata.find({username:username});
+            console.log("data sent with username");
+        }else if(category){
+            data=await postdata.find({category:category});
+            console.log("data sent with category");
+        }else{
+            data=await postdata.find({});
+            console.log("data sent without username");
+        }
         response.status(200).json(data);
     }
     catch(error){

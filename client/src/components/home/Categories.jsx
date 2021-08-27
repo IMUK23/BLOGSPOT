@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState,useEffect } from 'react'
 import {Box,Button, InputBase, makeStyles, StylesProvider, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
 import History from '../History'
 
@@ -39,6 +40,13 @@ const styleClass=makeStyles({
 function Categories() {
     const categoryarray=['Music','Movies','Sports','Fashion','Tech']
     const styles=styleClass()
+    const [searchdata,inputdata]=useState("");
+
+    const input=(e)=>{
+        inputdata(e.target.value);
+    }
+
+
     return (
         <>
         <Button onClick={() => History.push('/create')} variant="contained" className={styles.createButton} >CREATE BLOG
@@ -49,12 +57,16 @@ function Categories() {
             <TableHead>
                 <TableRow>
                     <Box className={styles.searchdiv}>
-                    <InputBase className={styles.searchbox} placeholder="Seach By Category" name="seachbox" />
-                    <Button variant="contained" className={styles.searchbutton} >Search </Button>
+                    <InputBase onChange={(e)=> input(e)}className={styles.searchbox} placeholder="Seach By Category" name="seachbox" />
+                    <Button onClick={()=>{
+                        History.push(`/?category=${searchdata}`)
+                    }} variant="contained" className={styles.searchbutton} >Search </Button>
                     </Box>
                 </TableRow>
                 <TableRow>
-                    <TableCell>Popular Categories
+                    <TableCell  className={styles.categoryname} onClick={()=>{
+                        History.push(`/`)
+                    }}>All Categories
                     </TableCell>    
                 </TableRow>
             </TableHead>
@@ -62,7 +74,9 @@ function Categories() {
             <TableBody>
                 {categoryarray.map(category=>(
                     <TableRow>
-                    <TableCell className={styles.categoryname}>{category}</TableCell>
+                    <TableCell onClick={()=>{
+                        History.push(`/?category=${category}`)
+                    }} className={styles.categoryname}>{category}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

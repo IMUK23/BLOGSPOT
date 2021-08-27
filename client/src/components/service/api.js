@@ -12,10 +12,9 @@ export const sendData= async(data) =>{
 }
 
 
-export const getPostData=async() =>{
+export const getPostData=async(param) =>{
     try{
-        const response= await axios.get(`${URL}/post`)
-        console.log(response.data);
+        const response= await axios.get(`${URL}/post${param}`)
         return response.data;
     }
     catch(error){

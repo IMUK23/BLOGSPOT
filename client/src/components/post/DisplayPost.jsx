@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
-import {Box, makeStyles, StylesProvider, TextareaAutosize, Typography} from '@material-ui/core'
+import {Box,Link, makeStyles, StylesProvider, TextareaAutosize, Typography} from '@material-ui/core'
 import { Delete,Edit} from '@material-ui/icons';
 import  History  from './../History';
 import { getOnePostData,deletecurrblog } from '../service/api';
@@ -32,6 +32,11 @@ const styleclass=makeStyles(theme=>({
         margin:"50px 0px 10px 10px ",
         fontSize:"30px",
         fontWeight:"600"
+    },
+    link:{
+        textDecoration:'none',
+        color:'inherit',
+        cursor:"pointer"
     },
     subhead:{
         display:"flex",
@@ -86,10 +91,25 @@ function DisplayPost({match}) {
             </Box>
             <Typography className={style.title}>{post.title}</Typography>
             <Box className={style.subhead}>    
-                <Typography className={style.author}>Author : <span>{post.username}</span></Typography>
+               
+                    <Typography className={style.author}>Author : 
+                        
+                    <Link className={style.link} onClick={() => {
+   History.push(`/?username=${post.username}`)
+  }}>
+                        <span>{post.username}</span>
+                    </Link>    
+                    </Typography>
                 <Typography className={style.date}>Date : {new Date(post.date).toDateString()}</Typography>
             </Box>
-            <Typography className={style.category}>Category : {post.category}</Typography>
+                
+                <Typography className={style.category}>Category :
+                <Link className={style.link} onClick={() => {
+   History.push(`/?category=${post.category}`)}}>          
+                {post.category}
+                </Link>
+                </Typography>
+            
             <Typography className={style.description}>
             {post.description}
             </Typography>
