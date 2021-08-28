@@ -50,5 +50,14 @@ export const deletecurrblog = async(id) =>{
 }
 
 
+export const uploadImage= async(data) => {
+    try{
+        return await axios.post(`${URL}/file/upload`,data);
+    }
+    catch(error){
+        console.log("Some error is encountered while fetching through api");
+    }
+}
+
 
 

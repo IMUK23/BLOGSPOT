@@ -1,6 +1,7 @@
 import React from 'react'
 import {Box,Typography,makeStyles} from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import History from '../History'
 
 const styleclass=makeStyles({
   container:{
@@ -10,7 +11,8 @@ const styleclass=makeStyles({
     margin:"10px",
     border:"1px solid #9A9A9A",
     borderRadius:"5px",
-    alignItems:"center"
+    alignItems:"center",
+    overflow:"hidden"
   },
     postimage:{
     height:"150px",
@@ -21,7 +23,7 @@ const styleclass=makeStyles({
   author:{
       fontWeight:"bold",
       fontSize:"13px",
-      color:"#5C5C5C"
+      color:"#7D7D7D"
   },
   category:{
     fontWeight:"bold",
@@ -31,11 +33,11 @@ const styleclass=makeStyles({
    title:{
     fontWeight:"bold",
     fontSize:"18px",
-    color:"#7D7D7D"
+    color:"#5C5C5C"
   },
    intro:{
     fontWeight:"bold",
-    fontSize:"18px",
+    fontSize:"15px",
     color:"#5C5C5C",
     wordBreak:"break-word"
   },
@@ -52,9 +54,12 @@ function Posttemplate({post}) {
         <Link className={styles.link} to={`/display/${post._id}`}>
           <Box className={styles.container}>
               <img src={url} alt="image" className={styles.postimage}/>
-              <Typography className={styles.category}>{post.category}</Typography>
-              <Typography className={styles.author}>{post.username}</Typography>
+              <Typography  className={styles.category}>{post.category}</Typography>
+              
               <Typography className={styles.title}>{post.title}</Typography>
+
+              <Typography  className={styles.author}>{post.username}</Typography>
+              
               <Typography className={styles.intro}>{post.description}</Typography> 
           </Box>
         </Link>
