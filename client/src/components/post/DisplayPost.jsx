@@ -4,6 +4,8 @@ import {Box,Link, makeStyles, StylesProvider, TextareaAutosize, Typography} from
 import { Delete,Edit} from '@material-ui/icons';
 import  History  from './../History';
 import { getOnePostData,deletecurrblog } from '../service/api';
+import Comment from '../comment/Comment';
+import PostComment from '../comment/PostComment';
 
 const styleclass=makeStyles(theme=>({
     container:{
@@ -113,8 +115,9 @@ function DisplayPost({match}) {
             <Typography className={style.description}>
             {post.description}
             </Typography>
-            
-        
+
+        <PostComment />    
+        <Comment />
         </Box>
     )
 }
