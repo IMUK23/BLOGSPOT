@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {Box,makeStyles, TextareaAutosize, Typography} from '@material-ui/core'
 import {Delete, Edit} from '@material-ui/icons'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DoneIcon from '@material-ui/icons/Done';
+import { editComment, getCommentData } from '../service/api';
 
 const styleClass =makeStyles({
     container:{
@@ -42,30 +43,47 @@ const styleClass =makeStyles({
     }
 })
 
-function Comment() {
-
+const Comment= (props) => {
+    const id=props.id;
     const styles=styleClass();
     const [visible,changeVisible]=useState(false);
 
-    const [comment,setComment]=useState("comment");
+    const [comment,setComment]=useState({});
+    const [trigger , update] =useState(false);
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const data=await getCommentData(id);
+            setComment(data);
+            console.log(data);
+        }
+        fetchData();
+    },[trigger])
     
-    const editComment=(e)=>{
-        setComment(e.target.value);
+    const editCommentField=(e)=>{
+        setComment(co => ({...co,[e.target.name]:e.target.value}));
+    }
+
+
+    const changecomment=()=>{
+        editComment(id,comment);
+        update(!trigger);
+        changeVisible(!visible);
     }
     
     return (
         <Box className={styles.container}>
            <Box className={styles.commentbox}> 
                 <Box className={styles.header}>
-                    <Typography className={styles.author}> Author Name</Typography>
-                    <AccessTimeIcon className ={styles.timeicon}></AccessTimeIcon>
-                    <Typography className={styles.date}>Date</Typography>
+                    <Typography className={styles.author}>{comment.commentauthor}</Typography>
+                    <AccessTimeIcon className ={styles.timeicon}> </AccessTimeIcon>
+                    <Typography className={styles.date}>{new Date(comment.commentdate).toDateString()}</Typography>
                 </Box>
                 {
-                !visible && <Typography className={styles.comment}>{comment}</Typography>
+                !visible && <Typography className={styles.comment}>{comment.commentdata}</Typography>
                 }
                 {
-                visible && <TextareaAutosize onChange={(e)=> editComment(e)} className={styles.comment} value={comment}></TextareaAutosize>
+                visible && <TextareaAutosize onChange={(e)=> editCommentField(e)} name="commentdata" className={styles.comment} ></TextareaAutosize>
                 }
                 
                 
@@ -76,7 +94,7 @@ function Comment() {
                 !visible && <Edit onClick={()=> changeVisible(!visible)} className={styles.icon} color="primary" />
                 }
                 {
-                visible && <DoneIcon onClick={()=> changeVisible(!visible)} className={styles.icon} color="primary" />
+                visible && <DoneIcon onClick={()=> changecomment()} className={styles.icon} color="primary" />
                 }
 
                 <Delete onClick={()=> changeVisible(false)} className={styles.icon} color="error" />

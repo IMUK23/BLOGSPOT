@@ -59,5 +59,53 @@ export const uploadImage= async(data) => {
     }
 }
 
+/*Creating Comments API*/
 
+export const sendComment = async(data) =>{
+    try{
+        return await axios.post(`${URL}/comments`,data);
+    }
+    catch(error){
+        console.log("Oops Found Some error in sending data");
+    }
+}
 
+export const getComments= async(id) =>{
+    try{
+        const comments= await axios.get(`${URL}/postComments/${id}`);
+        return comments.data;
+    }
+    catch(error){
+        console.log("Some error is encountered while fetching Comments through api");
+    }
+}
+
+export const getCommentData =async(id) =>{
+    try{
+        const comment = await axios.get(`${URL}/getComment/${id}`);
+        console.log("Data got by api : "+comment);
+        return comment.data;
+    }
+    catch(error){
+        console.log("Some error is encountered while fetching current Comments through api");
+    }
+}
+
+export const editComment= async(id,comment) => {
+    try{
+        await axios.post(`${URL}/editComment/${id}`,comment);
+    }
+    catch(error){
+        console.log("Some error is encountered while editing Comments through api");
+    }
+}
+
+export const deleteComment= async(id) =>{
+    try{
+        await axios.delete(`${URL}/deleteComment/${id}`)
+    }
+    catch(error){
+        console.log("Some error is encountered while deleting Comments through api");
+    }
+}
+ 
