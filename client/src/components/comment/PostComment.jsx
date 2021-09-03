@@ -88,7 +88,7 @@ const PostComment = (props) => {
                 <Button variant="contained" color="primary" onClick={()=>sendCommentData()}> Post</Button>
             </Box>
             {comments.map(co=>(
-                <Comment id={co._id}/>
+                <Comment id={co._id} t={trigger} f={update}/>
             ))}
             
            

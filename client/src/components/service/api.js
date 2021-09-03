@@ -102,7 +102,8 @@ export const editComment= async(id,comment) => {
 
 export const deleteComment= async(id) =>{
     try{
-        await axios.delete(`${URL}/deleteComment/${id}`)
+        console.log("Deleting comment");
+        await axios.delete(`${URL}/deletecomment/${id}`);
     }
     catch(error){
         console.log("Some error is encountered while deleting Comments through api");

@@ -3,7 +3,8 @@ import {Box,makeStyles, TextareaAutosize, Typography} from '@material-ui/core'
 import {Delete, Edit} from '@material-ui/icons'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DoneIcon from '@material-ui/icons/Done';
-import { editComment, getCommentData } from '../service/api';
+import { deleteComment, editComment, getCommentData } from '../service/api';
+import History from '../History';
 
 const styleClass =makeStyles({
     container:{
@@ -45,6 +46,8 @@ const styleClass =makeStyles({
 
 const Comment= (props) => {
     const id=props.id;
+    const p_update=props.f;
+    const p_trigger=props.t;
     const styles=styleClass();
     const [visible,changeVisible]=useState(false);
 
@@ -65,12 +68,22 @@ const Comment= (props) => {
     }
 
 
-    const changecomment=()=>{
-        editComment(id,comment);
+    const changecomment=async ()=>{
+        await editComment(id,comment);
         update(!trigger);
         changeVisible(!visible);
     }
     
+    const removeComment =() =>{
+        console.log("Comment Deletion started Successfully");
+        deleteComment(id);
+        console.log("Comment Delete completed Successfully");
+        History.go(0);
+        //p_update(!p_trigger);
+       
+    }
+
+
     return (
         <Box className={styles.container}>
            <Box className={styles.commentbox}> 
@@ -83,7 +96,7 @@ const Comment= (props) => {
                 !visible && <Typography className={styles.comment}>{comment.commentdata}</Typography>
                 }
                 {
-                visible && <TextareaAutosize onChange={(e)=> editCommentField(e)} name="commentdata" className={styles.comment} ></TextareaAutosize>
+                visible && <TextareaAutosize onChange={(e)=> editCommentField(e)} name="commentdata" className={styles.comment}>{comment.commentdata}</TextareaAutosize>
                 }
                 
                 
@@ -97,7 +110,7 @@ const Comment= (props) => {
                 visible && <DoneIcon onClick={()=> changecomment()} className={styles.icon} color="primary" />
                 }
 
-                <Delete onClick={()=> changeVisible(false)} className={styles.icon} color="error" />
+                <Delete onClick={()=> removeComment()} className={styles.icon} color="error" />
             </Box>    
 
         </Box>    
