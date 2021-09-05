@@ -34,7 +34,8 @@ const styleClass =makeStyles({
         marginTop:"5px",
         marginBottom:"5px",
         outline:"none",
-        border:"none"
+        border:"none",
+        wordBreak:"break-word"
     },
     icon:{
         border:"1px solid #000",

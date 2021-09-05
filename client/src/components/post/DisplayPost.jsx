@@ -64,12 +64,11 @@ const styleclass=makeStyles(theme=>({
 function DisplayPost({match}) {
     const style=styleclass();
     const [post,setPost]=useState({})
-    
     useEffect(()=>{
         const fetchdata = async() =>{
             let data=await getOnePostData(match.params.id)
             setPost(data)
-            console.log(data);
+            console.log("Fetched data is" +data);
         }
         fetchdata()
     },[])
@@ -117,8 +116,11 @@ function DisplayPost({match}) {
             <Typography className={style.description}>
             {post.description}
             </Typography>
-
-        <PostComment postid={match.params.id} />    
+                    
+            
+            <PostComment postid={match.params.id}  /> 
+                  
+          
         
         </Box>
     )
