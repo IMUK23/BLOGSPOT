@@ -112,12 +112,22 @@ export const deleteComment= async(id) =>{
 
 /*Likes functions*/
 
-export const createlike= async(data) =>{
+export const addlike= async(id,data) =>{
     try{
         console.log("Creating like model for post");
-        await axios.post(`${URL}/likes`,data);
+        await axios.post(`${URL}/addlike/${id}`,data);
     }
     catch(error){
         console.log("Some error is encountered while creating likes model through api");
+    }
+}
+
+
+export const removelike=async(id) =>{
+    try{
+        await axios.delete(`${URL}/deletelike/${id}`)
+    }
+    catch(error){
+        console.log("Error while removing like");
     }
 }
