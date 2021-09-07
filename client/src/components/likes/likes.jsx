@@ -1,53 +1,70 @@
 import React,{useState,useEffect,useRef} from 'react';
+import { makeStyles} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { updatePostData } from '../service/api';
+import { getOnePostData } from '../service/api';
 
-
-
-
-const likes= (props)=> {
-    const [visible,changeVisible]=useState("");
-    const [trigger,update] =useState(false);
-
-    const [like,setLike]=useState("");
-    useEffect(()=>{
-    const fetchdata = async() =>{
-        let data=await getLiketData(props.postid)
-        setLike(data)
-        if(data!=null){
-            changeVisible(true);
-        }
-        else{
-            changeVisible(false);
-        }
+const styleClass= makeStyles({
+    like:{
+        marginTop:"20px",
     }
-    fetchdata()
-    },[trigger])
+})
+
+const Likes= (props)=> {
+    const styles=styleClass()
+    const [postdata,setPost]=useState({liked:[]})
+    let initialvisible=false;
+   if(postdata.liked.indexOf('Utkarsh')==-1){
+        initialvisible=false;
+    }
+    else{
+        initialvisible=true;
+    }
+    
+    const [visible,changeVisible]=useState(initialvisible); 
+    useEffect(()=>{
+        const fetchdata = async() =>{
+            let data=await getOnePostData(props.postid)
+            setPost(data)
+            console.log("Fetched data is" +data);
+            if(data.liked.indexOf('Utkarsh')==-1){
+                changeVisible(false);
+            }
+            else{
+                changeVisible(true);
+            }
+        }
+        fetchdata()
+    },[])
+
+    const updateLike = async () => {
+        if(postdata.liked.indexOf('Utkarsh') ==-1)
+        {postdata.liked.push('Utkarsh');}
+        else{
+            let index=postdata.liked.indexOf('Utkarsh');
+        postdata.liked.splice(index,1);
+        }
+        await updatePostData(props.postid,postdata);
+        changeVisible(!visible);
+    }
 
 
-const addinglike = async () => {
-    changeVisible(!visible);
-    update(!trigger)
-  
-    data={[postid]:props.postid,[username]:'Utkarsh'}
-    await addLike(props.postid,data);
-}
 
-const deletinglike =async () =>{}
 
 
     return (
         <>
          {
-              (visible===false) && <FavoriteBorderIcon className={styles.like} onClick={()=>{updatelike()}} color="error"/>
+                !visible && <FavoriteBorderIcon className={styles.like} onClick={()=>{updateLike()}} color="error"/>
             }
             {
-              (visible===true) && <FavoriteIcon className={styles.like} onClick={()=>{updatelike()}}  color="error"/>
+                visible && <FavoriteIcon className={styles.like} onClick={()=>{updateLike()}}  color="error"/>
             }
         </>
             
     )
 }
 
-export default likes
+export default Likes
 

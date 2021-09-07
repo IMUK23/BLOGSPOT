@@ -8,6 +8,7 @@ import { getOnePostData,deletecurrblog } from '../service/api';
 import PostComment from '../comment/PostComment';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Likes from '../likes/Likes';
 
 const styleclass=makeStyles(theme=>({
     container:{
@@ -117,7 +118,7 @@ function DisplayPost({match}) {
             <Typography className={style.description}>
             {post.description}
             </Typography>
-
+        <Likes postid={match.params.id}/>
         <PostComment postid={match.params.id} />    
         
         </Box>
