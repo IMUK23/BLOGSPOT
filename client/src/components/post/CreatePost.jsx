@@ -69,8 +69,7 @@ function CreatePost() {
         username: 'Utkarsh',
         date: new Date(),
         description: '',
-        image: '',
-        liked:[]
+        image: ''
     }
 
     const [ post, setPost ] = useState(initialvalues)

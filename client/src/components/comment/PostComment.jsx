@@ -1,10 +1,13 @@
 import { Box,makeStyles, TextareaAutosize,Button } from '@material-ui/core'
 import React,{useState,useEffect,useRef} from 'react'
 import PersonIcon from '@material-ui/icons/Person';
-
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import Comment from '../comment/Comment';
 import { getComments } from '../service/api';
 import { sendComment } from '../service/api';
+import { updatePostData } from '../service/api';
+import { getOnePostData } from '../service/api';
 import History from '../History';
 
 const styleClass=makeStyles({
@@ -37,6 +40,33 @@ const PostComment = (props) => {
         commentdata:""
     }
 
+    const [postdata,setPost]=useState({liked:[]})
+    let initialvisible=false;
+   if(postdata.liked.indexOf('Utkarsh')==-1){
+        initialvisible=false;
+    }
+    else{
+        initialvisible=true;
+    }
+    
+    const [visible,changeVisible]=useState(initialvisible); 
+    useEffect(()=>{
+        const fetchdata = async() =>{
+            let data=await getOnePostData(props.postid)
+            setPost(data)
+            console.log("Fetched data is" +data);
+            if(data.liked.indexOf('Utkarsh')==-1){
+                changeVisible(false);
+            }
+            else{
+                changeVisible(true);
+            }
+        }
+        fetchdata()
+    },[])
+
+   
+    
     const [comments,setComments] =useState([]);
 
     const [comment,setComment] = useState(initialcommentvalue);
@@ -56,8 +86,7 @@ const PostComment = (props) => {
         }
         fetchdata();
         console.log(comments);
-    }
-    ,[trigger])
+    },[trigger])
 
     const addComment=(e)=>{
         setComment(co => ({...co,[e.target.name]:e.target.value}))
@@ -75,8 +104,25 @@ const PostComment = (props) => {
         }
     }
 
+    const updateLike = async () => {
+        if(postdata.liked.indexOf('Utkarsh') ==-1)
+        {postdata.liked.push('Utkarsh');}
+        else{
+            let index=postdata.liked.indexOf('Utkarsh');
+        postdata.liked.splice(index,1);
+        }
+        await updatePostData(props.postid,postdata);
+        changeVisible(!visible);
+    }
+
     return (
         <>
+            {
+                !visible && <FavoriteBorderIcon className={styles.like} onClick={()=>{updateLike()}} color="error"/>
+            }
+            {
+                visible && <FavoriteIcon className={styles.like} onClick={()=>{updateLike()}}  color="error"/>
+            }
             <Box className={styles.container}>
                 <PersonIcon/>
                 <TextareaAutosize ref={ref} onChange={(e=> addComment(e))} className={styles.commentbox} minRows={3} placeholder="Add Your Comment Here" name="commentdata"/>

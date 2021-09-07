@@ -24,6 +24,11 @@ const postschema = mongoose.Schema({
     image:{
         type:String,
         required:false
+    },
+    liked:{
+        type:Object,
+        required:false,
+        default:[]
     }
 })
 
