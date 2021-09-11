@@ -3,11 +3,15 @@ import Banner from './Banner'
 import Categories from './Categories'
 import Posts from './Posts'
 import {Box,Button, Grid} from '@material-ui/core'
+import Header from '../Header'
 
 
 function Home() {
     return (
         <>
+        <Header>
+        
+        </Header>
         <Banner />
         <Grid container >
             <Grid item lg={2} xs={12} sm={12}>

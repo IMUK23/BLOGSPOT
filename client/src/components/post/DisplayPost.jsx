@@ -4,10 +4,8 @@ import {Box,Link, makeStyles, StylesProvider, TextareaAutosize, Typography} from
 import { Delete,Edit} from '@material-ui/icons';
 import  History  from './../History';
 import { getOnePostData,deletecurrblog } from '../service/api';
-
+import Header from '../Header';
 import PostComment from '../comment/PostComment';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import Likes from '../likes/Likes';
 
 const styleclass=makeStyles(theme=>({
@@ -88,6 +86,10 @@ function DisplayPost({match}) {
     }
 
     return (
+        <>
+        <Header>
+    
+        </Header>
         <Box className={style.container}>
             <img className={style.image} src={post.image || 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'}/>
             <Box className={style.icons}>
@@ -122,6 +124,7 @@ function DisplayPost({match}) {
         <PostComment postid={match.params.id} />    
         
         </Box>
+        </>
     )
 }
 

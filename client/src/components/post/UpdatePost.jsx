@@ -4,6 +4,7 @@ import {Box, FormControl, makeStyles,Button, InputBase, TextareaAutosize} from '
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import { getOnePostData ,updatePostData,uploadImage } from '../service/api';
 import History from '../History';
+import Header from '../Header';
 
 const styleclass=makeStyles(theme => ({
     container:{
@@ -97,7 +98,10 @@ function UpdatePost({match}) {
     }
 
     return (
-
+        <>
+        <Header>
+      
+        </Header>
         <Box className={style.container}>
              <img className={style.image} src={`${url}`}  alt="banner image" />
             <FormControl className={style.form}>
@@ -130,7 +134,8 @@ function UpdatePost({match}) {
              value={post.description}
              onChange={e => handlechange(e)}>
             </TextareaAutosize>
-        </Box>    
+        </Box>
+        </>    
     )
 }
 

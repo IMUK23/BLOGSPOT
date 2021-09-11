@@ -12,9 +12,6 @@ function App() {
     <Router history={History}>
     <div className="App">
       
-        <Header>
-        {document.title="BLOGSPOT"}
-        </Header>
         
         <Box style={{marginTop:'64px'}}>
         {Routes}

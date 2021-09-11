@@ -38,7 +38,9 @@ function Header() {
             <Link className={styles.link} to="/contact">
             <Typography>CONTACT</Typography>
             </Link>
+            <Link className={styles.link} to="/login">
             <Typography>LOGIN</Typography>
+            </Link>
             </Toolbar>
         </AppBar>
         </React.Fragment>

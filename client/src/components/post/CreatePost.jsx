@@ -4,6 +4,7 @@ import { Box, FormControl, makeStyles, Button, InputBase, TextareaAutosize } fro
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import {sendData,uploadImage} from './../service/api'
 import History from '../History';
+import Header from '../Header';
 
 const styleclass = makeStyles(theme => ({
     container: {
@@ -107,6 +108,10 @@ function CreatePost() {
     
     console.log(post)
     return (
+        <>
+        <Header>
+
+        </Header>
         <Box className={style.container}>
             <img className={style.image} src={`${url}`}  alt="banner image" />
             <FormControl className={style.form}>
@@ -125,6 +130,7 @@ function CreatePost() {
 
             </TextareaAutosize>
         </Box>
+        </>
     )
 }
 

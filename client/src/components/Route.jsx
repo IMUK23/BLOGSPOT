@@ -6,6 +6,8 @@ import UpdatePost from './post/UpdatePost'
 import DisplayPost from './post/DisplayPost'
 import About from './about/About'
 import Contact from './contact/Contact'
+import Login from './login/Login'
+import Signup from './login/Signup'
 
 
 function Routes() {
@@ -18,6 +20,8 @@ function Routes() {
                 <Route exact path="/create" component={CreatePost} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/contact" component={Contact} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
             </Switch>
         
     )
