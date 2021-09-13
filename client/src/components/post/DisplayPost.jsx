@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
-import {Box,Link, makeStyles, StylesProvider, TextareaAutosize, Typography} from '@material-ui/core'
+import {Box,Link, makeStyles, Typography} from '@material-ui/core'
 import { Delete,Edit} from '@material-ui/icons';
 import  History  from './../History';
 import { getOnePostData,deletecurrblog } from '../service/api';

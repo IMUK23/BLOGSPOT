@@ -1,6 +1,5 @@
 import React from 'react'
-import {Box,colors,FormControl,InputBase,makeStyles, Typography,Input,Button} from '@material-ui/core'
-import { borders } from '@material-ui/system';
+import {Box,FormControl,makeStyles, Typography,Input,Button} from '@material-ui/core'
 import PasswordField from 'material-ui-password-field'
 import {Facebook,GooglePlus,Linkedin} from "@trejgun/material-ui-icons-social-networks"
 import History from '../History';
@@ -18,7 +17,7 @@ const styleClass = makeStyles((theme)=>(
         },
         loginbox:{
             width:"30%",
-            height:"62%",
+            height:"65%",
             padding:"20px",
             display:"flex",
             background:"#FFFFFF",

@@ -1,10 +1,8 @@
 import {React,useState} from 'react'
-import {Box,colors,FormControl,InputBase,makeStyles, Typography,Input,Button,Checkbox} from '@material-ui/core'
-import { borders } from '@material-ui/system';
+import {Box,FormControl,InputBase,makeStyles, Typography,Input,Button,Checkbox} from '@material-ui/core'
 import PasswordField from 'material-ui-password-field'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {Facebook,GooglePlus,Linkedin} from "@trejgun/material-ui-icons-social-networks"
 import History from '../History';
+import {addUserData} from '../service/api'
 
 const styleClass = makeStyles((theme)=>(
     {
@@ -51,6 +49,7 @@ const styleClass = makeStyles((theme)=>(
         
         terms:{
             color:"gray",
+            fontSize:"12px"
         },
         
         
@@ -72,6 +71,7 @@ const styleClass = makeStyles((theme)=>(
             width:"100%",
             display:"flex",
             flexDirection:"row",
+            alignItems:"center"
             
         }
     }
@@ -80,6 +80,25 @@ const styleClass = makeStyles((theme)=>(
 
 const Signup=() =>{
 const styles=styleClass()
+const [checked,changeChecked] =useState(false)
+const [userdata,updatedata] =useState({}) 
+
+const changeData= (e)=> {
+    updatedata({...userdata,[e.target.name]:e.target.value});
+    console.log(userdata);
+}
+
+const pushData= async () => {
+    if(!checked){
+        alert("Please agree to the terms before procedding")
+    }
+    else{
+        History.push('/login')
+        await addUserData(userdata)
+    }
+}
+
+
 return (
     <>
     <Box className={styles.container} >
@@ -88,15 +107,22 @@ return (
             <Box className={styles.userdata}>
                 <FormControl className={styles.form}>
                     Full Name
-                    <Input  className={styles.inputfield} inputProps={{ 'aria-label': 'description' }} />
+                    <Input name="name" 
+                           onChange={(e)=> changeData(e)}
+                           className={styles.inputfield}
+                           inputProps={{ 'aria-label': 'description' }} />
                 </FormControl>
                 <FormControl className={styles.form}>
                     Username
-                    <Input  className={styles.inputfield} inputProps={{ 'aria-label': 'description' }} />
+                    <Input name="username"
+                           onChange={(e)=> changeData(e)}
+                           className={styles.inputfield} 
+                           inputProps={{ 'aria-label': 'description' }} />
                 </FormControl>
                 <FormControl className={styles.form}>
                     Password
-                    <PasswordField
+                    <PasswordField name="password"
+                        onChange={(e)=> changeData(e)}
                         hintText="At least 8 characters"
                         floatingLabelText="Enter your password"
                         errorText="Your password is too short"
@@ -105,13 +131,14 @@ return (
                 </FormControl> 
                 <Box className={styles.check}>
                      <Checkbox
-                        checked={true}
+                        onChange={()=> changeChecked(!checked)}
+                        checked={checked}
                         name="checkedB"
                         color="primary"
                     />
                     <Typography className={styles.terms}>I agree to terms and conditions of Blogspot</Typography>
                 </Box>    
-                <Button variant="contained" className={styles.signup_button} onClick={()=> History.push('/login')}>SignUp </Button>
+                <Button variant="contained" className={styles.signup_button} onClick={()=>pushData()}>SignUp </Button>
             </Box>
             
         </Box>    

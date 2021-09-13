@@ -131,3 +131,15 @@ export const removelike=async(id) =>{
         console.log("Error while removing like");
     }
 }
+
+
+/*User Data function*/
+
+export const addUserData = async(data)=>{
+    try{
+        await axios.post(`${URL}/addUser`,data);
+    }
+    catch(error){
+        console.log("Error while adding userdata through API");
+    }
+}
