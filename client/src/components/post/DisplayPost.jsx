@@ -7,6 +7,7 @@ import { getOnePostData,deletecurrblog } from '../service/api';
 import Header from '../Header';
 import PostComment from '../comment/PostComment';
 import Likes from '../likes/Likes';
+import { globaluser } from '../login/Login';
 
 const styleclass=makeStyles(theme=>({
     container:{
@@ -62,6 +63,7 @@ const styleclass=makeStyles(theme=>({
 
 function DisplayPost({match}) {
     const style=styleclass();
+    const curruser=globaluser;
     const [post,setPost]=useState({})
     
     useEffect(()=>{
@@ -75,7 +77,7 @@ function DisplayPost({match}) {
 
     const deleteblog= async() =>{
        try {
-        History.push('/');
+        History.push('/home');
            await deletecurrblog(match.params.id);
            
            console.log("Data Deleted Successfully");
@@ -92,17 +94,17 @@ function DisplayPost({match}) {
         </Header>
         <Box className={style.container}>
             <img className={style.image} src={post.image || 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'}/>
-            <Box className={style.icons}>
+           {post.username===curruser.username && <Box className={style.icons}>
                 <Edit onClick={()=> History.push(`/update/${post._id}`)} className={style.icon} color="primary" />
                 <Delete onClick={()=> deleteblog()} className={style.icon} color="error"/>
-            </Box>
+            </Box>}
             <Typography className={style.title}>{post.title}</Typography>
             <Box className={style.subhead}>    
                
                     <Typography className={style.author}>Author : 
                         
                     <Link className={style.link} onClick={() => {
-   History.push(`/?username=${post.username}`)
+   History.push(`/home/?username=${post.username}`)
   }}>
                         <span>{post.username}</span>
                     </Link>    
@@ -112,7 +114,7 @@ function DisplayPost({match}) {
                 
                 <Typography className={style.category}>Category :
                 <Link className={style.link} onClick={() => {
-   History.push(`/?category=${post.category}`)}}>          
+   History.push(`/home/?category=${post.category}`)}}>          
                 {post.category}
                 </Link>
                 </Typography>

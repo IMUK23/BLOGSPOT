@@ -59,13 +59,13 @@ function Categories() {
                     <Box className={styles.searchdiv}>
                     <InputBase onChange={(e)=> input(e)}className={styles.searchbox} placeholder="Seach By Category" name="seachbox" />
                     <Button onClick={()=>{
-                        History.push(`/?category=${searchdata}`)
+                        History.push(`/home/?category=${searchdata}`)
                     }} variant="contained" className={styles.searchbutton} >Search </Button>
                     </Box>
                 </TableRow>
                 <TableRow>
                     <TableCell  className={styles.categoryname} onClick={()=>{
-                        History.push(`/`)
+                        History.push(`/home`)
                     }}>All Categories
                     </TableCell>    
                 </TableRow>
@@ -75,7 +75,7 @@ function Categories() {
                 {categoryarray.map(category=>(
                     <TableRow>
                     <TableCell onClick={()=>{
-                        History.push(`/?category=${category}`)
+                        History.push(`/home/?category=${category}`)
                     }} className={styles.categoryname}>{category}</TableCell>
                     </TableRow>
                 ))}

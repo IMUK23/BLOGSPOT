@@ -1,8 +1,10 @@
-import React from 'react'
+import {React,createContext} from 'react'
 import {Box,FormControl,makeStyles, Typography,Input,Button} from '@material-ui/core'
 import PasswordField from 'material-ui-password-field'
 import {Facebook,GooglePlus,Linkedin} from "@trejgun/material-ui-icons-social-networks"
 import History from '../History';
+import { useState} from 'react'
+import { getuserData } from '../service/api'; 
 
 const styleClass = makeStyles((theme)=>(
     {
@@ -84,8 +86,36 @@ const styleClass = makeStyles((theme)=>(
         }
     }
 ))
+
+export let globaluser={}
 const Login= ()=> {
     const styles=styleClass()
+    
+    const initial={fullname:"",username:"",Password:""};
+    
+    const [userdata,updatedata]=useState(initial)
+
+    const fillinfo=(e) => (
+        updatedata(userdata=>({...userdata,[e.target.name]:e.target.value} ))
+)
+
+
+    const loginuser= async () =>{
+        const returneddata= await getuserData(userdata.username);
+        console.log(returneddata.data[0]);
+        if(returneddata.data[0]===initial || returneddata.data[0].Password!==userdata.Password){
+            alert("Username or password is wrong");
+        }
+        else{
+            console.log(userdata);
+            
+            window.globaluser={...userdata};
+             globaluser={...userdata};
+
+            History.push('/home')
+        }
+    }
+
     return (
         <>
         <Box className={styles.container} >
@@ -94,11 +124,13 @@ const Login= ()=> {
                 <Box className={styles.userdata}>
                     <FormControl className={styles.form}>
                         Username
-                        <Input  className={styles.inputfield} inputProps={{ 'aria-label': 'description' }} />
+                        <Input name="username"onChange={(e)=>{fillinfo(e)}} className={styles.inputfield} inputProps={{ 'aria-label': 'description' }} />
                     </FormControl>
                     <FormControl className={styles.form}>
                         Password
                         <PasswordField
+                        name="Password"
+                            onChange={(e)=>{fillinfo(e)}}
                             hintText="At least 8 characters"
                             floatingLabelText="Enter your password"
                             errorText="Your password is too short"
@@ -109,7 +141,7 @@ const Login= ()=> {
                         <Typography className={styles.transfer_links}> Forgot Password</Typography>
                         <Typography className={styles.transfer_links} onClick={()=> History.push('/signup')}> Sign In</Typography>
                     </Box>
-                    <Button variant="contained" className={styles.login_button}>Login </Button>
+                    <Button variant="contained" className={styles.login_button} onClick={() => loginuser()} >Login </Button>
                 </Box>
                 <Box className={styles.sociallogin}>
                 
@@ -128,3 +160,4 @@ const Login= ()=> {
 }
 
 export default Login
+

@@ -137,9 +137,20 @@ export const removelike=async(id) =>{
 
 export const addUserData = async(data)=>{
     try{
-        await axios.post(`${URL}/addUser`,data);
+        await axios.post(`${URL}/user`,data);
     }
     catch(error){
         console.log("Error while adding userdata through API");
+    }
+}
+
+
+export const getuserData = async(data) => {
+    try {
+        const returndata= await axios.get(`${URL}/finduser/${data}`);
+        return returndata;
+    }
+    catch(error){
+        console.log("Front End userdata fetch failure")
     }
 }

@@ -29,7 +29,7 @@ function Header() {
         <React.Fragment>
         <AppBar className={styles.container}>
             <Toolbar className={styles.component}>
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to="/home">
                 <Typography>HOME</Typography>
             </Link>
             <Link className={styles.link} to="/about">
@@ -38,8 +38,8 @@ function Header() {
             <Link className={styles.link} to="/contact">
             <Typography>CONTACT</Typography>
             </Link>
-            <Link className={styles.link} to="/login">
-            <Typography>LOGIN</Typography>
+            <Link className={styles.link} to="/">
+            <Typography>LOGOUT</Typography>
             </Link>
             </Toolbar>
         </AppBar>

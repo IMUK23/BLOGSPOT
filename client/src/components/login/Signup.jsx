@@ -81,7 +81,8 @@ const styleClass = makeStyles((theme)=>(
 const Signup=() =>{
 const styles=styleClass()
 const [checked,changeChecked] =useState(false)
-const [userdata,updatedata] =useState({}) 
+const initialuserdata={fullname:"",username:"",Password:""}
+const [userdata,updatedata] =useState(initialuserdata) 
 
 const changeData= (e)=> {
     updatedata({...userdata,[e.target.name]:e.target.value});
@@ -93,8 +94,13 @@ const pushData= async () => {
         alert("Please agree to the terms before procedding")
     }
     else{
-        History.push('/login')
-        await addUserData(userdata)
+        if(userdata["fullname"]==="" || userdata["username"]==="" || userdata["Password"]===""){
+            alert("Please Fill all the fields to proceed further");
+        }
+        else{
+            
+        History.push('/')
+        await addUserData(userdata)}
     }
 }
 
@@ -107,7 +113,7 @@ return (
             <Box className={styles.userdata}>
                 <FormControl className={styles.form}>
                     Full Name
-                    <Input name="name" 
+                    <Input name="fullname" 
                            onChange={(e)=> changeData(e)}
                            className={styles.inputfield}
                            inputProps={{ 'aria-label': 'description' }} />
@@ -121,7 +127,7 @@ return (
                 </FormControl>
                 <FormControl className={styles.form}>
                     Password
-                    <PasswordField name="password"
+                    <PasswordField name="Password"
                         onChange={(e)=> changeData(e)}
                         hintText="At least 8 characters"
                         floatingLabelText="Enter your password"

@@ -1,10 +1,12 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState,useEffect ,useContext} from 'react';
 import { Box, FormControl, makeStyles, Button, InputBase, TextareaAutosize } from '@material-ui/core'
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import {sendData,uploadImage} from './../service/api'
 import History from '../History';
 import Header from '../Header';
+import { globaluser } from '../login/Login';
+
 
 const styleclass = makeStyles(theme => ({
     container: {
@@ -63,11 +65,12 @@ const styleclass = makeStyles(theme => ({
 
 function CreatePost() {
     const style = styleclass()
+    const curruser=globaluser;
   
     const initialvalues = {
         title: '',
         category: 'General',
-        username: 'Utkarsh',
+        username: curruser.username,
         date: new Date(),
         description: '',
         image: ''
@@ -103,7 +106,7 @@ function CreatePost() {
 
     const savePost = async () =>{
         await sendData(post)
-        History.push("/");
+        History.push("/home");
     }
     
     console.log(post)

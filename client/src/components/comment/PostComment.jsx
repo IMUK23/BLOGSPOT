@@ -4,8 +4,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import Comment from '../comment/Comment';
 import { getComments } from '../service/api';
 import { sendComment } from '../service/api';
+import { globaluser } from '../login/Login';
 
-import History from '../History';
 
 const styleClass=makeStyles({
     container:{
@@ -27,12 +27,12 @@ const styleClass=makeStyles({
 })
 
 
-const PostComment = (props) => {
+function PostComment(props){
     const styles=styleClass();
-    
+    const curruser=globaluser;
     const initialcommentvalue={
         postid: props.postid,
-        commentauthor:"Utkarsh",
+        commentauthor:curruser.username,
         commentdate: new Date(),
         commentdata:""
     }

@@ -5,6 +5,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DoneIcon from '@material-ui/icons/Done';
 import { deleteComment, editComment, getCommentData } from '../service/api';
 import History from '../History';
+import { globaluser } from '../login/Login';
 
 const styleClass =makeStyles({
     container:{
@@ -48,6 +49,7 @@ const Comment= (props) => {
     const id=props.id;
     const p_update=props.f;
     const p_trigger=props.t;
+    const curruser=globaluser;
     const styles=styleClass();
     const [visible,changeVisible]=useState(false);
 
@@ -78,7 +80,8 @@ const Comment= (props) => {
         console.log("Comment Deletion started Successfully");
         deleteComment(id);
         console.log("Comment Delete completed Successfully");
-        History.go(0);
+       
+        History.push('/home');
         //p_update(!p_trigger);
        
     }
@@ -102,7 +105,7 @@ const Comment= (props) => {
                 
                 
             </Box>    
-            <Box className={styles.buttons}>
+            {comment.commentauthor==curruser.username && <Box className={styles.buttons}>
                 {
                 !visible && <Edit onClick={()=> changeVisible(!visible)} className={styles.icon} color="primary" />
                 }
@@ -111,7 +114,7 @@ const Comment= (props) => {
                 }
 
                 <Delete onClick={()=> removeComment()} className={styles.icon} color="error" />
-            </Box>    
+            </Box>  }  
 
         </Box>    
     )
