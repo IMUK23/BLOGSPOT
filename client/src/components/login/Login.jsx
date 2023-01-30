@@ -89,30 +89,39 @@ const styleClass = makeStyles((theme)=>(
 
 export let globaluser={}
 const Login= ()=> {
+    /*Style function which helps us in styling the web page*/ 
     const styles=styleClass()
-    
+    /*Initial value of the user data */
     const initial={fullname:"",username:"",Password:""};
     
+    /*A state hook which stores the userdata and update when any change occurs in the data */
     const [userdata,updatedata]=useState(initial)
 
+    /*Function which fills info of the updated user data */
     const fillinfo=(e) => (
         updatedata(userdata=>({...userdata,[e.target.name]:e.target.value} ))
 )
 
-
+/*This is the asynchronous login user function which first fetches the userdata from the backend system using entered 
+user's information*/
     const loginuser= async () =>{
         const returneddata= await getuserData(userdata.username);
-        console.log(returneddata.data[0]);
-        if(returneddata.data[0]===initial || returneddata.data[0].Password!==userdata.Password){
-            alert("Username or password is wrong");
-        }
-        else{
+        /*If we received empty user name from backend we will generate alert window */ 
+        if(returneddata.data.username===''){alert("Username or password is wrong");}
+        
+        /*Or if password matches then we move onto the the home page of the system */
+        else if(returneddata.data[0].Password===userdata.Password){
             console.log(userdata);
             
-            window.globaluser={...userdata};
              globaluser={...userdata};
 
             History.push('/home')
+           
+        }
+
+        /*Otherwise we will still get alert window*/ 
+        else{
+            alert("Username or password is wrong");
         }
     }
 
