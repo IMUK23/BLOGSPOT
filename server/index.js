@@ -14,5 +14,3 @@ const PORT=8000;
 app.listen(PORT,()=> console.log(`Running on ${PORT} `))
 
 Connection();
-
-module.exports = app;
