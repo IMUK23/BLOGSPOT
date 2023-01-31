@@ -2,9 +2,9 @@ import { Box,makeStyles, TextareaAutosize,Button } from '@material-ui/core'
 import React,{useState,useEffect,useRef} from 'react'
 import PersonIcon from '@material-ui/icons/Person';
 import Comment from '../comment/Comment';
-import { getComments } from '../service/api';
-import { sendComment } from '../service/api';
-import { globaluser } from '../login/Login';
+import { getComments } from './../service/api';
+import { sendComment } from './../service/api';
+import { globaluser } from './../login/Login';
 
 
 const styleClass=makeStyles({

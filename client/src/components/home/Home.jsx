@@ -3,7 +3,7 @@ import Banner from './Banner'
 import Categories from './Categories'
 import Posts from './Posts'
 import {Box,Button, Grid} from '@material-ui/core'
-import Header from '../Header'
+import Header from './../Header'
 
 
 function Home() {

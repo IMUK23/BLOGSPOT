@@ -3,9 +3,9 @@ import {Box,makeStyles, TextareaAutosize, Typography} from '@material-ui/core'
 import {Delete, Edit} from '@material-ui/icons'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DoneIcon from '@material-ui/icons/Done';
-import { deleteComment, editComment, getCommentData } from '../service/api';
-import History from '../History';
-import { globaluser } from '../login/Login';
+import { deleteComment, editComment, getCommentData } from './../service/api';
+import History from './../History';
+import { globaluser } from './../login/Login';
 
 const styleClass =makeStyles({
     container:{

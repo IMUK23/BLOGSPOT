@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box} from '@material-ui/core'
-import Header from '../Header'
+import Header from './../Header'
 function About() {
     return (
         <>

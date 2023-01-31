@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import {Box,Button, InputBase, makeStyles, StylesProvider, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core'
-import History from '../History'
+import History from './../History'
 
 const styleClass=makeStyles({
     createButton:{

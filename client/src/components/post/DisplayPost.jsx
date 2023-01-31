@@ -3,11 +3,11 @@ import {useState,useEffect} from 'react'
 import {Box,Link, makeStyles, Typography} from '@material-ui/core'
 import { Delete,Edit} from '@material-ui/icons';
 import  History  from './../History';
-import { getOnePostData,deletecurrblog } from '../service/api';
-import Header from '../Header';
-import PostComment from '../comment/PostComment';
-import Likes from '../likes/Likes';
-import { globaluser } from '../login/Login';
+import { getOnePostData,deletecurrblog } from './../service/api';
+import Header from './../Header';
+import PostComment from './../comment/PostComment';
+import Likes from './../likes/Likes';
+import { globaluser } from './../login/Login';
 
 const styleclass=makeStyles(theme=>({
     container:{

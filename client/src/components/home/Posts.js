@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react'
 import { useLocation } from 'react-router'
 import {Grid} from '@material-ui/core'
 import Posttemplate from './Posttemplate'
-import { getPostData } from '../service/api'
+import { getPostData } from './../service/api'
 
 
 

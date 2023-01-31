@@ -2,9 +2,9 @@ import React,{useState,useEffect,useRef} from 'react';
 import { makeStyles} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { updatePostData } from '../service/api';
-import { getOnePostData } from '../service/api';
-import { globaluser } from '../login/Login';
+import { updatePostData } from './../service/api';
+import { getOnePostData } from './../service/api';
+import { globaluser } from './../login/Login';
 
 const styleClass= makeStyles({
     like:{

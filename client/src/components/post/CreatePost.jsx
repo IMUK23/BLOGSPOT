@@ -3,9 +3,9 @@ import { useState,useEffect ,useContext} from 'react';
 import { Box, FormControl, makeStyles, Button, InputBase, TextareaAutosize } from '@material-ui/core'
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import {sendData,uploadImage} from './../service/api'
-import History from '../History';
-import Header from '../Header';
-import { globaluser } from '../login/Login';
+import History from './../History';
+import Header from './../Header';
+import { globaluser } from './../login/Login';
 
 
 const styleclass = makeStyles(theme => ({

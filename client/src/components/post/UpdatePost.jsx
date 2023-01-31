@@ -2,9 +2,9 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import {Box, FormControl, makeStyles,Button, InputBase, TextareaAutosize} from '@material-ui/core'
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
-import { getOnePostData ,updatePostData,uploadImage } from '../service/api';
-import History from '../History';
-import Header from '../Header';
+import { getOnePostData ,updatePostData,uploadImage } from './../service/api';
+import History from './../History';
+import Header from './../Header';
 
 const styleclass=makeStyles(theme => ({
     container:{
