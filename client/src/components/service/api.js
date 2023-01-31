@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL="https://blogspot-beta.vercel.app/";
+const URL="https://blogspot-beta.vercel.app";
 
 export const sendData= async(data) =>{
     try{
