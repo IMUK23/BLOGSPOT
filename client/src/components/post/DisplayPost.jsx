@@ -6,7 +6,7 @@ import  History  from './../History';
 import { getOnePostData,deletecurrblog } from './../service/api';
 import Header from './../Header';
 import PostComment from './../comment/PostComment';
-import Likes from './../likes/Likes';
+import Likes from '/../likes/Likes';
 import { globaluser } from './../login/Login';
 
 const styleclass=makeStyles(theme=>({
