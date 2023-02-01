@@ -2,9 +2,9 @@ import {React,createContext} from 'react'
 import {Box,FormControl,makeStyles, Typography,Input,Button} from '@material-ui/core'
 import PasswordField from 'material-ui-password-field'
 import {Facebook,GooglePlus,Linkedin} from "@trejgun/material-ui-icons-social-networks"
-import History from '../History';
+import History from './../History';
 import { useState} from 'react'
-import { getuserData } from '../service/api'; 
+import { getuserData } from './../service/api'; 
 
 const styleClass = makeStyles((theme)=>(
     {
